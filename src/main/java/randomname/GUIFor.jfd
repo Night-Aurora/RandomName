@@ -1,0 +1,102 @@
+JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundleName": "form"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"title": new FormMessage( null, "this.title" )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+					"$layoutConstraints": "insets dialog,hidemode 3"
+					"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill]"
+					"$rowConstraints": "[][][][][][][][][][][][][]"
+				} ) {
+					name: "contentPanel"
+					"minimumSize": new java.awt.Dimension( 180, 206 )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": new FormMessage( null, "label3.text" )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 0 0"
+					} )
+					add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+						name: "tabbedPane2"
+						"preferredSize": new java.awt.Dimension( 120, 60 )
+						"maximumSize": new java.awt.Dimension( 180, 60 )
+						"minimumSize": new java.awt.Dimension( 160, 91 )
+						add( new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+							name: "menuBar1"
+							"preferredSize": new java.awt.Dimension( 209, 10 )
+							add( new FormComponent( "javax.swing.JSlider" ) {
+								name: "slider1"
+								addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "slider1StateChanged", true ) )
+							} )
+							add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+								name: "scrollPane2"
+								add( new FormComponent( "javax.swing.JLabel" ) {
+									name: "label1"
+									"text": new FormMessage( null, "label1.text" )
+								} )
+							} )
+						}, new FormLayoutConstraints( null ) {
+							"title": new FormMessage( null, "menuBar1.tab.title" )
+						} )
+						add( new FormComponent( "javax.swing.JCheckBox" ) {
+							name: "checkBox1"
+							"text": new FormMessage( null, "checkBox1.text" )
+							"maximumSize": new java.awt.Dimension( 60, 50 )
+							"minimumSize": new java.awt.Dimension( 60, 91 )
+						}, new FormLayoutConstraints( null ) {
+							"title": new FormMessage( null, "checkBox1.tab.title" )
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "Clear"
+							"text": new FormMessage( null, "Clear.text" )
+							"preferredSize": new java.awt.Dimension( 57, 30 )
+							addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "ClearMouseClicked", true ) )
+						}, new FormLayoutConstraints( null ) {
+							"title": new FormMessage( null, "Clear.tab.title" )
+						} )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 7 1"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "Next"
+						"text": new FormMessage( null, "Next.text" )
+						"preferredSize": new java.awt.Dimension( 57, 30 )
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "NextMouseClicked", true ) )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 7 4"
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane1"
+						add( new FormComponent( "javax.swing.JTextPane" ) {
+							name: "Out"
+							"preferredSize": new java.awt.Dimension( 10, 50 )
+						} )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 4 8 7 3"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": new FormMessage( null, "label2.text" )
+						"preferredSize": new java.awt.Dimension( 174, 35 )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 7 11 1 2"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 135, 110 )
+			"size": new java.awt.Dimension( 490, 340 )
+		} )
+	}
+}
