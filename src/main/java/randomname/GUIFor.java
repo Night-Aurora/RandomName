@@ -55,7 +55,7 @@ public class GUIFor extends JFrame {
         label3 = new JLabel();
         tabbedPane2 = new JTabbedPane();
         menuBar1 = new JMenuBar();
-        slider1 = new JSlider(1,8,1);
+        slider1 = new JSlider(1,6,1);
         scrollPane2 = new JScrollPane();
         label1 = new JLabel();
         checkBox1 = new JCheckBox();

@@ -9,7 +9,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileReader
 import java.lang.System.currentTimeMillis
-import java.util.*
+import kotlin.random.Random
 
 class RandomName {
     companion object{
@@ -19,12 +19,13 @@ class RandomName {
         var wb: Workbook? = null
         var sheet: Sheet? = null
         val filePath = "${path}课程表.xlsx"
-        var random = Random()
         var hash = HashMap<Int,String>()
         var startT = 0L
         var rc = ArrayList<Int>()
         @JvmStatic
         fun main(args:Array<String>){
+            println("Powered By Night_Aurora")
+            println("Github-Source Code: https://github.com/Night-Aurora/RandomName")
             val p = File(path)
             if(!p.exists())
                 p.mkdirs()
@@ -37,6 +38,22 @@ class RandomName {
             val gui = GUIFor()
             gui.isVisible = true
             KeepThread(gui).start()
+        }
+
+        fun test(){
+            val h = HashMap<Int,Int>()
+            var i = 0
+            val time = 200
+            while(i < time){
+                i++
+                val s = randomSingleNumber(hash.size)
+                h[s] = h.getOrDefault(s,0)+1
+            }
+            h.forEach{
+                if(it.value > 2){
+                    println("${hash[it.key]}:${it.value}")
+                }
+            }
         }
 
         fun loadFile(path:String):File?{
@@ -64,10 +81,10 @@ class RandomName {
         }
 
         fun randomSingleNumber(size:Int):Int{
-            val r = random.nextInt(size+1)
-            if(r == 0 || (r == 41 && whichClasses() == "语文"))
-                return randomSingleNumber(size-1)
-            if(rc.size==65){
+            val r = Random.nextInt(1,size+1)
+            if(r == 41 && whichClasses() == "语文")
+                return randomSingleNumber(size)
+            if(rc.size>=66){
                 rc.clear()
                 startT = currentTimeMillis()
                 println("rc reset! because rcList is full")
@@ -84,7 +101,8 @@ class RandomName {
             return r
         }
         fun chec3min(d:Int):Boolean{
-            if(rc.contains(d)) return true
+            if(rc.contains(d))
+                return true
             else rc.add(d)
             return false
         }
@@ -99,7 +117,7 @@ class RandomName {
                 while (s == ""){
                     val a = randomSingleNumber(hash.size)
                     if(!chec3min(a))
-                        s = hash[randomSingleNumber(hash.size)]!!
+                        s = hash[a]!!
                 }
             }else{
                 randomMuitNumber(hash.size,l).forEach {
