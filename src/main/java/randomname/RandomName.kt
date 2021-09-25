@@ -107,7 +107,7 @@ class RandomName {
             return false
         }
         fun randomname(l:Int):String{
-            if((currentTimeMillis() - startT) >= 180*1000){
+            if((currentTimeMillis() - startT) >= 700*1000){
                 rc.clear()
                 startT = currentTimeMillis()
                 println("rc reset!")
