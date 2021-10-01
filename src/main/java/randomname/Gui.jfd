@@ -1,0 +1,99 @@
+JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundleName": "String"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :p:33:p, comp label4::::70:x, space :p:505:p}, seq l {space :p:169:p, par l {comp tabbedPane3:::::x, comp Next2:::::x}, space :p:155:p}, seq t {space :p:83:p, comp label6::::456:x, space :p:69:p}, seq t {space :p:62:p, comp scrollPane1::::486:x, space :p:60:p}}"
+			"$verticalGroup": "par l {seq l {space :p:33:p, par l {seq {comp label4::::35:x, space :p:153:p}, seq {comp tabbedPane3::::95:x, space :p:27:p, comp Next2::::66:x}}, space :p:51:p, comp scrollPane1::::86:x, space :p:31:p, comp label6::::66:x, space :p:143:p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": new FormMessage( null, "label4.text" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 10, false )
+			} )
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabbedPane3"
+				"preferredSize": new java.awt.Dimension( 180, 60 )
+				"maximumSize": new java.awt.Dimension( 240, 80 )
+				"minimumSize": new java.awt.Dimension( 240, 91 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+				add( new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+					name: "menuBar2"
+					"preferredSize": new java.awt.Dimension( 209, 10 )
+					add( new FormComponent( "javax.swing.JSlider" ) {
+						name: "slider2"
+						addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "slider1StateChanged", true ) )
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane3"
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label5"
+							"text": new FormMessage( null, "label5.text" )
+							"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+						} )
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": new FormMessage( null, "menuBar2.tab.title" )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "Clear2"
+					"text": new FormMessage( null, "Clear2.text" )
+					"preferredSize": new java.awt.Dimension( 57, 30 )
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "ClearMouseClicked", true ) )
+				}, new FormLayoutConstraints( null ) {
+					"title": new FormMessage( null, "Clear2.tab.title" )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {space :::p, comp radioButton1:::p::p, space ::96:x, comp radioButton2:::p::p, space :p:18:p}}"
+					"$verticalGroup": "par l {seq l {space :::p, par b {comp radioButton1::b:p:32:p, comp radioButton2::b:p:31:p}, space ::25:x}}"
+				} ) {
+					name: "panel1"
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "radioButton1"
+						"text": new FormMessage( null, "radioButton1.text" )
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton1ActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "radioButton2"
+						"text": new FormMessage( null, "radioButton2.text" )
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton2ActionPerformed", true ) )
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": new FormMessage( null, "panel1.tab.title_2" )
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "Next2"
+				"text": new FormMessage( null, "Next2.text" )
+				"preferredSize": new java.awt.Dimension( 57, 30 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 15, false )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "NextMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": new FormMessage( null, "label6.text" )
+				"preferredSize": new java.awt.Dimension( 174, 35 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTextPane" ) {
+					name: "Out2"
+					"preferredSize": new java.awt.Dimension( 10, 65 )
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 12, false )
+					"minimumSize": new java.awt.Dimension( 7, 65 )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 90, 25 )
+			"size": new java.awt.Dimension( 610, 630 )
+		} )
+	}
+}

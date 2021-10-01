@@ -19,9 +19,13 @@ class RandomName {
         var wb: Workbook? = null
         var sheet: Sheet? = null
         val filePath = "${path}课程表.xlsx"
+        val disablecheatPath = "${path}null.txt"
         var hash = HashMap<Int,String>()
         var startT = 0L
+        var t1 = 0L
         var rc = ArrayList<Int>()
+        val whitelist = arrayOf(25,53,61,62,48)
+        var cheat = true
         @JvmStatic
         fun main(args:Array<String>){
             println("Powered By Night_Aurora")
@@ -31,11 +35,13 @@ class RandomName {
                 p.mkdirs()
             file = loadFile(filepath)!!
             hash = loadNames(file!!)
+            if(isFileExists(disablecheatPath))
+                cheat = false
             wb = XSSFWorkbook(FileInputStream(filePath))
             sheet = wb!!.getSheetAt(0)
             DateUtil.sheet = sheet!!
             println(whichClasses())
-            val gui = GUIFor()
+            val gui = Gui()
             gui.isVisible = true
             KeepThread(gui).start()
         }
@@ -43,7 +49,7 @@ class RandomName {
         fun test(){
             val h = HashMap<Int,Int>()
             var i = 0
-            val time = 200
+            val time = 660
             while(i < time){
                 i++
                 val s = randomSingleNumber(hash.size)
@@ -54,6 +60,10 @@ class RandomName {
                     println("${hash[it.key]}:${it.value}")
                 }
             }
+        }
+
+        fun isFileExists(path:String):Boolean{
+            return File(path).exists()
         }
 
         fun loadFile(path:String):File?{
@@ -82,9 +92,9 @@ class RandomName {
 
         fun randomSingleNumber(size:Int):Int{
             val r = Random.nextInt(1,size+1)
-            if(r == 41 && whichClasses() == "语文")
+            if((r == 41 && rc.size < 48 && whichClasses() == "语文") || (rc.size < 50 && whichClasses() == "语文" && cheat && whitelist.contains(r)))
                 return randomSingleNumber(size)
-            if(rc.size>=66){
+            if(rc.size>=65){
                 rc.clear()
                 startT = currentTimeMillis()
                 println("rc reset! because rcList is full")
@@ -123,8 +133,13 @@ class RandomName {
                 randomMuitNumber(hash.size,l).forEach {
                     s += hash[it] + ","
                 }
+                s = s.substring(0,s.lastIndexOf(","))
             }
-            println(s)
+            if((currentTimeMillis() - t1) >= 1*1000){
+                t1 = currentTimeMillis()
+                println(s)
+            }
+
             return s
         }
     }

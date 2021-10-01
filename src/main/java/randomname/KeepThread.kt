@@ -2,11 +2,11 @@ package randomname
 
 import randomname.DateUtil.Companion.whichClasses
 
-class KeepThread(private val gui:GUIFor) : Thread() {
+class KeepThread(private val gui:Gui) : Thread() {
     override fun run() {
         try {
             while (true){
-                gui.setClass(whichClasses())
+                gui.setClasses(whichClasses())
                 sleep(1000*5)
             }
         }catch (e:Exception){
