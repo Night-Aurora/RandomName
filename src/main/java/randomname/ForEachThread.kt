@@ -10,7 +10,7 @@ class ForEachThread : Thread() {
             //var stringcache = ""
             if(forEaching) {
                 RandomName.hash.forEach{
-                    out!!.text = it.value
+                    out!!.text = "               ${it.value}"
                     sleep(40)
                 }
             }

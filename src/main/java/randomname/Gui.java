@@ -18,7 +18,7 @@ import javax.swing.event.*;
 public class Gui extends JFrame {
     private boolean foreaching = false;
     private ForEachThread forEachThread = new ForEachThread();
-    private ResourceBundle bundle = ResourceBundle.getBundle("String");
+    private final ResourceBundle bundle = ResourceBundle.getBundle("String");
     public Gui() {
         initComponents();
         slider2.setMinimum(1);
@@ -28,6 +28,7 @@ public class Gui extends JFrame {
         buttonGroup.add(radioButton1);
         buttonGroup.add(radioButton2);
         radioButton1.setSelected(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void slider1StateChanged(ChangeEvent e) {
@@ -70,6 +71,12 @@ public class Gui extends JFrame {
 
     private void radioButton1ActionPerformed(ActionEvent e) {
         //default
+        if(foreaching){
+            foreaching = false;
+            forEachThread.setForEaching(false);
+            forEachThread.stop();
+            Next2.setText(bundle.getString("Next2.text"));
+        }
         if(!radioButton2.isSelected())
             Out2.setFont(Out2.getFont().deriveFont(24f));
     }
@@ -86,6 +93,10 @@ public class Gui extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         ResourceBundle bundle = ResourceBundle.getBundle("String");
         label4 = new JLabel();
+        Next2 = new JButton();
+        label6 = new JLabel();
+        scrollPane1 = new JScrollPane();
+        Out2 = new JTextPane();
         tabbedPane3 = new JTabbedPane();
         menuBar2 = new JMenuBar();
         slider2 = new JSlider();
@@ -95,17 +106,40 @@ public class Gui extends JFrame {
         panel1 = new JPanel();
         radioButton1 = new JRadioButton();
         radioButton2 = new JRadioButton();
-        Next2 = new JButton();
-        label6 = new JLabel();
-        scrollPane1 = new JScrollPane();
-        Out2 = new JTextPane();
 
         //======== this ========
+        setTitle(bundle.getString("this.title"));
         Container contentPane = getContentPane();
 
         //---- label4 ----
         label4.setText(bundle.getString("label4.text"));
         label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 10f));
+
+        //---- Next2 ----
+        Next2.setText(bundle.getString("Next2.text"));
+        Next2.setPreferredSize(new Dimension(57, 30));
+        Next2.setFont(Next2.getFont().deriveFont(Next2.getFont().getSize() + 15f));
+        Next2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                NextMouseClicked(e);
+            }
+        });
+
+        //---- label6 ----
+        label6.setText(bundle.getString("label6.text"));
+        label6.setPreferredSize(new Dimension(174, 35));
+        label6.setFont(label6.getFont().deriveFont(label6.getFont().getSize() + 8f));
+
+        //======== scrollPane1 ========
+        {
+
+            //---- Out2 ----
+            Out2.setPreferredSize(new Dimension(10, 65));
+            Out2.setFont(Out2.getFont().deriveFont(Out2.getFont().getSize() + 12f));
+            Out2.setMinimumSize(new Dimension(7, 65));
+            scrollPane1.setViewportView(Out2);
+        }
 
         //======== tabbedPane3 ========
         {
@@ -166,7 +200,7 @@ public class Gui extends JFrame {
                         .addGroup(panel1Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(radioButton1)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(radioButton2)
                             .addGap(18, 18, 18))
                 );
@@ -177,36 +211,10 @@ public class Gui extends JFrame {
                             .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(radioButton1, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(radioButton2, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(25, Short.MAX_VALUE))
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
             }
             tabbedPane3.addTab(bundle.getString("panel1.tab.title_2"), panel1);
-        }
-
-        //---- Next2 ----
-        Next2.setText(bundle.getString("Next2.text"));
-        Next2.setPreferredSize(new Dimension(57, 30));
-        Next2.setFont(Next2.getFont().deriveFont(Next2.getFont().getSize() + 15f));
-        Next2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                NextMouseClicked(e);
-            }
-        });
-
-        //---- label6 ----
-        label6.setText(bundle.getString("label6.text"));
-        label6.setPreferredSize(new Dimension(174, 35));
-        label6.setFont(label6.getFont().deriveFont(label6.getFont().getSize() + 5f));
-
-        //======== scrollPane1 ========
-        {
-
-            //---- Out2 ----
-            Out2.setPreferredSize(new Dimension(10, 65));
-            Out2.setFont(Out2.getFont().deriveFont(Out2.getFont().getSize() + 12f));
-            Out2.setMinimumSize(new Dimension(7, 65));
-            scrollPane1.setViewportView(Out2);
         }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
@@ -214,23 +222,21 @@ public class Gui extends JFrame {
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(33, 33, 33)
-                    .addComponent(label4, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                    .addGap(505, 505, 505))
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(169, 169, 169)
-                    .addGroup(contentPaneLayout.createParallelGroup()
-                        .addComponent(tabbedPane3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Next2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGap(155, 155, 155))
-                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addGap(83, 83, 83)
-                    .addComponent(label6, GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
-                    .addGap(69, 69, 69))
-                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                     .addGap(62, 62, 62)
-                    .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                    .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
                     .addGap(60, 60, 60))
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addGap(33, 33, 33)
+                    .addComponent(label4, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                    .addGap(44, 44, 44)
+                    .addGroup(contentPaneLayout.createParallelGroup()
+                        .addComponent(tabbedPane3, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                        .addComponent(Next2, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
+                    .addGap(147, 147, 147))
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(label6, GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+                    .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
@@ -238,17 +244,17 @@ public class Gui extends JFrame {
                     .addGap(33, 33, 33)
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(label4, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                            .addGap(153, 153, 153))
+                            .addComponent(label4, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                            .addGap(165, 165, 165))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(tabbedPane3, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                            .addGap(27, 27, 27)
-                            .addComponent(Next2, GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)))
-                    .addGap(51, 51, 51)
-                    .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addGap(31, 31, 31)
-                    .addComponent(label6, GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                    .addGap(143, 143, 143))
+                            .addComponent(tabbedPane3, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(Next2, GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                            .addGap(33, 33, 33)))
+                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+                    .addGap(27, 27, 27)
+                    .addComponent(label6, GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                    .addGap(28, 28, 28))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -257,6 +263,10 @@ public class Gui extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel label4;
+    private JButton Next2;
+    private JLabel label6;
+    private JScrollPane scrollPane1;
+    private JTextPane Out2;
     private JTabbedPane tabbedPane3;
     private JMenuBar menuBar2;
     private JSlider slider2;
@@ -266,10 +276,6 @@ public class Gui extends JFrame {
     private JPanel panel1;
     private JRadioButton radioButton1;
     private JRadioButton radioButton2;
-    private JButton Next2;
-    private JLabel label6;
-    private JScrollPane scrollPane1;
-    private JTextPane Out2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     class mode2 extends Panel{
         public mode2(){

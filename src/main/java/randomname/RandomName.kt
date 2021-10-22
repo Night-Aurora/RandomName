@@ -22,7 +22,6 @@ class RandomName {
         val disablecheatPath = "${path}null.txt"
         var hash = HashMap<Int,String>()
         var startT = 0L
-        var t1 = 0L
         var rc = ArrayList<Int>()
         val whitelist = arrayOf(25,53,61,62,48)
         var cheat = true
@@ -135,11 +134,7 @@ class RandomName {
                 }
                 s = s.substring(0,s.lastIndexOf(","))
             }
-            if((currentTimeMillis() - t1) >= 1*1000){
-                t1 = currentTimeMillis()
                 println(s)
-            }
-
             return s
         }
     }
