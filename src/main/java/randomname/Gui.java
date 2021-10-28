@@ -253,8 +253,8 @@ public class Gui extends JFrame {
                             .addGap(33, 33, 33)))
                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
                     .addGap(27, 27, 27)
-                    .addComponent(label6, GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
-                    .addGap(28, 28, 28))
+                    .addComponent(label6, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+                    .addGap(20, 20, 20))
         );
         pack();
         setLocationRelativeTo(getOwner());

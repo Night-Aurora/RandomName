@@ -1,24 +1,25 @@
 package randomname
 
-import org.apache.poi.ss.usermodel.Sheet
-import org.apache.poi.ss.usermodel.Workbook
-import org.apache.poi.xssf.usermodel.XSSFWorkbook
+//import org.apache.poi.ss.usermodel.Sheet
+//import org.apache.poi.ss.usermodel.Workbook
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import randomname.CourseUtil.Companion.loadCurriculum
 import randomname.DateUtil.Companion.whichClasses
 import java.io.BufferedReader
 import java.io.File
-import java.io.FileInputStream
 import java.io.FileReader
 import java.lang.System.currentTimeMillis
+import javax.swing.JOptionPane
 import kotlin.random.Random
 
 class RandomName {
     companion object{
         var file: File? = null
         var path = "RandomName/"
-        var filepath = "${path}xlx.txt"
-        var wb: Workbook? = null
-        var sheet: Sheet? = null
-        val filePath = "${path}¿Î³Ì±í.xlsx"
+        var filepath = "${path}students.txt"
+        //var wb: Workbook? = null
+        //var sheet: Sheet? = null
+        val curriculum = "${path}Curriculum.txt"
         val disablecheatPath = "${path}null.txt"
         var hash = HashMap<Int,String>()
         var startT = 0L
@@ -27,39 +28,36 @@ class RandomName {
         var cheat = true
         @JvmStatic
         fun main(args:Array<String>){
-            println("Powered By Night_Aurora")
-            println("Github-Source Code: https://github.com/Night-Aurora/RandomName")
-            val p = File(path)
-            if(!p.exists())
-                p.mkdirs()
-            file = loadFile(filepath)!!
-            hash = loadNames(file!!)
-            if(isFileExists(disablecheatPath))
-                cheat = false
-            wb = XSSFWorkbook(FileInputStream(filePath))
-            sheet = wb!!.getSheetAt(0)
-            DateUtil.sheet = sheet!!
-            println(whichClasses())
-            val gui = Gui()
-            gui.isVisible = true
-            KeepThread(gui).start()
+            try {
+                println("Powered By Night_Aurora")
+                println("Github-Source Code: https://github.com/Night-Aurora/RandomName")
+                val p = File(path)
+                if(!p.exists())
+                    p.mkdirs()
+                file = loadFile(filepath)!!
+                hash = loadNames(file!!)
+                if(isFileExists(disablecheatPath))
+                    cheat = false
+                loadCurriculum(loadFile(curriculum)!!)
+                /*
+                wb = XSSFWorkbook(FileInputStream(curriculum))
+                sheet = wb!!.getSheetAt(0)
+                DateUtil.sheet = sheet!!
+
+                 */
+                println(whichClasses())
+                val gui = Gui()
+                gui.isVisible = true
+                KeepThread(gui).start()
+            }catch (e:NullPointerException){
+                JOptionPane.showMessageDialog(null, "The Directory is empty! \nRequire students.txt & Curriculum.txt", "Error Report!", JOptionPane.ERROR_MESSAGE, null)
+                e.printStackTrace()
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+
         }
 
-        fun test(){
-            val h = HashMap<Int,Int>()
-            var i = 0
-            val time = 660
-            while(i < time){
-                i++
-                val s = randomSingleNumber(hash.size)
-                h[s] = h.getOrDefault(s,0)+1
-            }
-            h.forEach{
-                if(it.value > 2){
-                    println("${hash[it.key]}:${it.value}")
-                }
-            }
-        }
 
         fun isFileExists(path:String):Boolean{
             return File(path).exists()

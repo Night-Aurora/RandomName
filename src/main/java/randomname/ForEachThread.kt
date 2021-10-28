@@ -7,11 +7,10 @@ class ForEachThread : Thread() {
     var forEaching = false
     override fun run() {
         while (true){
-            //var stringcache = ""
             if(forEaching) {
                 RandomName.hash.forEach{
                     out!!.text = "               ${it.value}"
-                    sleep(40)
+                    sleep(50)
                 }
             }
         }
