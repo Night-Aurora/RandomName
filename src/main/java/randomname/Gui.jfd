@@ -6,11 +6,14 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :p:62:p, comp scrollPane1::::506:x, space :p:60:p}, seq {space :p:33:p, comp label4::::80:x, space :p:44:p, par l {comp tabbedPane3::::324:x, comp Next2::::324:x}, space :p:147:p}, seq l {space :::p, comp label6::::616:x, space :::p}}"
-			"$verticalGroup": "par l {seq l {space :p:33:p, par l {seq {comp label4::::37:x, space :p:165:p}, seq {comp tabbedPane3:::p:87:p, space s:::p, comp Next2::::64:x, space :p:33:p}}, comp scrollPane1:::p:74:p, space :p:27:p, comp label6:::p:27:p, space :p:20:p}}"
+			"$horizontalGroup": "par l {seq {space :p:33:p, comp label4::::80:x, space :p:44:p, par l {comp tabbedPane3::::324:x, comp Next2::::324:x}, space :p:147:p}, seq t {space :p:62:p, comp scrollPane1::::506:x, space :p:60:p}, seq t {space :p::p, comp label6::::445:x, space :p:67:p, comp curriculumRadio:::p::p, space :p:25:p}}"
+			"$verticalGroup": "par l {seq l {space :p:33:p, par l {seq {comp label4::::33:x, space :p:165:p}, seq {comp tabbedPane3:::p:87:p, space s:::p, comp Next2::::60:x, space :p:33:p}}, comp scrollPane1:::p:74:p, space :p:27:p, comp label6:::p:27:p, space :p:24:p}, seq t {space ::356:x, comp curriculumRadio:::p::p, space :::p}}"
 		} ) {
 			name: "this"
 			"title": new FormMessage( null, "this.title" )
+			auxiliary() {
+				"JavaCodeGenerator.variableModifiers": 1
+			}
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label4"
 				"text": new FormMessage( null, "label4.text" )
@@ -92,8 +95,40 @@ new FormModel {
 					"title": new FormMessage( null, "panel1.tab.title_2" )
 				} )
 			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "curriculumRadio"
+				"text": new FormMessage( null, "curriculumRadio.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton3ActionPerformed", true ) )
+			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 115, 30 )
+			"location": new java.awt.Point( 0, 45 )
+			"size": new java.awt.Dimension( 630, 415 )
+		} )
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space ::541:x, comp mainRadio:::p::p, space :p:35:p}, seq l {space :::p, comp scrollPane2::::616:x, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp scrollPane2::::344:x, space :::p, comp mainRadio:::p::p, space :::p}}"
+		} ) {
+			name: "Curriculum"
+			auxiliary() {
+				"JavaCodeGenerator.variableModifiers": 1
+			}
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "table1"
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+					"preferredScrollableViewportSize": new java.awt.Dimension( 450, 600 )
+					"rowHeight": 30
+					addEvent( new FormEvent( "java.beans.PropertyChangeListener", "propertyChange", "table1PropertyChange", true ) )
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "mainRadio"
+				"text": new FormMessage( null, "mainRadio.text" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton3ActionPerformed", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 475 )
 			"size": new java.awt.Dimension( 630, 415 )
 		} )
 	}

@@ -6,7 +6,7 @@ import java.io.FileReader
 
 class CourseUtil {
     companion object{
-        private lateinit var courseFile:File
+        lateinit var courseFile:File
         private var courseList = ArrayList<Array<String>>()
         val NumberOfLines get() = courseList.size
         fun loadCurriculum(file: File){
@@ -20,7 +20,7 @@ class CourseUtil {
         @Throws(Exception::class)
         fun readForm(x:Int,y:Int):String?{
             return when{
-                x != 0 && y != 0 -> courseList[x - 1][y-1]
+                y != 0 && x != 0 -> courseList[y - 1][x-1]
                 else -> null
             }
         }

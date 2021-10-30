@@ -59,11 +59,15 @@ class DateUtil {
             val colnum = NumberOfLines//行总数
             try {
                 for (i in 1..colnum){
-                    val row1 = readForm(i,1)!!
-                    if(row1 == "Space") continue
+                    val row1 = readForm(1,i)!!
+                    if(row1 == "null") continue
                     val timeData = row1.split("~")//列
                     if(inTimeRange(timeData[0],timeData[1])){
-                        return readForm(i, weekday +1)!!
+                        val form = readForm(weekday +1,i)!!
+                        return when{
+                            form != "null" -> form
+                            else -> "rest"
+                        }
                     }
                 }
             }catch (e:NullPointerException){

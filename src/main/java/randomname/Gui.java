@@ -7,10 +7,13 @@ package randomname;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.*;
 import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.event.*;
+import javax.swing.table.*;
 
 /**
  * @author 1
@@ -19,8 +22,11 @@ public class Gui extends JFrame {
     private boolean foreaching = false;
     private ForEachThread forEachThread = new ForEachThread();
     private final ResourceBundle bundle = ResourceBundle.getBundle("String");
+    private final ArrayList<Container> containers = new ArrayList<>();
     public Gui() {
         initComponents();
+        containers.add(this.getContentPane());
+        containers.add(Curriculum.getContentPane());
         slider2.setMinimum(1);
         slider2.setMaximum(6);
         slider2.setValue(1);
@@ -28,7 +34,63 @@ public class Gui extends JFrame {
         buttonGroup.add(radioButton1);
         buttonGroup.add(radioButton2);
         radioButton1.setSelected(true);
+        TableEdit();
+    }
+    private void TableEdit(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        String[] columnNames = new String[]{"","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+        Integer[][] rowData = new Integer[10][8];
+        TableModel tableModel = new DefaultTableModel(rowData,columnNames);
+        writeTable(tableModel);
+        table1.setModel(tableModel);
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();// …Ë÷√tableƒ⁄»›æ”÷–
+        tcr.setHorizontalAlignment(JLabel.CENTER);
+        table1.setDefaultRenderer(Object.class, tcr);
+    }
+
+    public void writeTable(TableModel tableModel){
+        int tableColumn = tableModel.getColumnCount();
+        for (int y = 1;y<CourseUtil.Companion.getNumberOfLines();y++){
+            for (int x = 1;x<tableColumn;x++){
+                try {
+                    String value = CourseUtil.Companion.readForm(x,y);
+                    if(Objects.equals(value, "null")) continue;
+                    tableModel.setValueAt(value,y-1,x-1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void readTable(){
+        int rows = table1.getRowCount();//y
+        int column = table1.getColumnCount();//x
+        ArrayList<String> caches = new ArrayList<>();
+        for (int y = 0;y<rows;y++){
+            StringBuilder cache = new StringBuilder();
+            for (int x = 0;x<column;x++){
+                Object ob = table1.getValueAt(y,x);
+                String info;
+                if(ob == null) info = "null";
+                else info = ob.toString();
+                if(info.isEmpty()) info = "null";
+                cache.append(info).append(" ");
+            }
+            caches.add(String.valueOf(cache));
+        }
+        RandomName.Companion.readTable(caches);
+    }
+    private void table1PropertyChange(PropertyChangeEvent e) {
+        int row = table1.getSelectedRow();
+        int column = table1.getSelectedColumn();
+        if(row == -1 || column == -1) return;
+        //System.out.println(table1.getValueAt(row,column));
+        readTable();
+    }
+
+    private void println(Object object){
+        System.out.println(object);
     }
 
     private void slider1StateChanged(ChangeEvent e) {
@@ -87,6 +149,17 @@ public class Gui extends JFrame {
             Out2.setFont(Out2.getFont().deriveFont(44f));
     }
 
+    private void radioButton3ActionPerformed(ActionEvent e) {
+        Container main = containers.get(0);
+        Container curriculum = containers.get(1);
+        if(curriculumRadio.isSelected() && this.getContentPane() == main){
+            changeContentPane(curriculum);
+            mainRadio.setSelected(false);
+        }else if(mainRadio.isSelected() && this.getContentPane() == curriculum){
+            changeContentPane(main);
+            curriculumRadio.setSelected(false);
+        }
+    }
 
 
     private void initComponents() {
@@ -106,6 +179,11 @@ public class Gui extends JFrame {
         panel1 = new JPanel();
         radioButton1 = new JRadioButton();
         radioButton2 = new JRadioButton();
+        curriculumRadio = new JRadioButton();
+        Curriculum = new JFrame();
+        scrollPane2 = new JScrollPane();
+        table1 = new JTable();
+        mainRadio = new JRadioButton();
 
         //======== this ========
         setTitle(bundle.getString("this.title"));
@@ -217,14 +295,14 @@ public class Gui extends JFrame {
             tabbedPane3.addTab(bundle.getString("panel1.tab.title_2"), panel1);
         }
 
+        //---- curriculumRadio ----
+        curriculumRadio.setText(bundle.getString("curriculumRadio.text"));
+        curriculumRadio.addActionListener(e -> radioButton3ActionPerformed(e));
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(62, 62, 62)
-                    .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
-                    .addGap(60, 60, 60))
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(33, 33, 33)
                     .addComponent(label4, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
@@ -233,10 +311,16 @@ public class Gui extends JFrame {
                         .addComponent(tabbedPane3, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                         .addComponent(Next2, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
                     .addGap(147, 147, 147))
-                .addGroup(contentPaneLayout.createSequentialGroup()
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addGap(62, 62, 62)
+                    .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                    .addGap(60, 60, 60))
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(label6, GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
-                    .addContainerGap())
+                    .addComponent(label6, GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                    .addGap(67, 67, 67)
+                    .addComponent(curriculumRadio)
+                    .addGap(25, 25, 25))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
@@ -244,20 +328,69 @@ public class Gui extends JFrame {
                     .addGap(33, 33, 33)
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(label4, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                            .addComponent(label4, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                             .addGap(165, 165, 165))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addComponent(tabbedPane3, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(Next2, GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                            .addComponent(Next2, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                             .addGap(33, 33, 33)))
                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
                     .addGap(27, 27, 27)
                     .addComponent(label6, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20))
+                    .addGap(24, 24, 24))
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addContainerGap(356, Short.MAX_VALUE)
+                    .addComponent(curriculumRadio)
+                    .addContainerGap())
         );
         pack();
         setLocationRelativeTo(getOwner());
+
+        //======== Curriculum ========
+        {
+            Container CurriculumContentPane = Curriculum.getContentPane();
+
+            //======== scrollPane2 ========
+            {
+
+                //---- table1 ----
+                table1.setFont(table1.getFont().deriveFont(table1.getFont().getSize() + 5f));
+                table1.setPreferredScrollableViewportSize(new Dimension(450, 600));
+                table1.setRowHeight(30);
+                table1.addPropertyChangeListener(e -> table1PropertyChange(e));
+                scrollPane2.setViewportView(table1);
+            }
+
+            //---- mainRadio ----
+            mainRadio.setText(bundle.getString("mainRadio.text"));
+            mainRadio.addActionListener(e -> radioButton3ActionPerformed(e));
+
+            GroupLayout CurriculumContentPaneLayout = new GroupLayout(CurriculumContentPane);
+            CurriculumContentPane.setLayout(CurriculumContentPaneLayout);
+            CurriculumContentPaneLayout.setHorizontalGroup(
+                CurriculumContentPaneLayout.createParallelGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, CurriculumContentPaneLayout.createSequentialGroup()
+                        .addContainerGap(541, Short.MAX_VALUE)
+                        .addComponent(mainRadio)
+                        .addGap(35, 35, 35))
+                    .addGroup(CurriculumContentPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+                        .addContainerGap())
+            );
+            CurriculumContentPaneLayout.setVerticalGroup(
+                CurriculumContentPaneLayout.createParallelGroup()
+                    .addGroup(CurriculumContentPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mainRadio)
+                        .addContainerGap())
+            );
+            Curriculum.pack();
+            Curriculum.setLocationRelativeTo(Curriculum.getOwner());
+        }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -276,10 +409,10 @@ public class Gui extends JFrame {
     private JPanel panel1;
     private JRadioButton radioButton1;
     private JRadioButton radioButton2;
+    private JRadioButton curriculumRadio;
+    public JFrame Curriculum;
+    private JScrollPane scrollPane2;
+    private JTable table1;
+    private JRadioButton mainRadio;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-    class mode2 extends Panel{
-        public mode2(){
-
-        }
-    }
 }

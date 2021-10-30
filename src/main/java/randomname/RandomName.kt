@@ -3,14 +3,14 @@ package randomname
 //import org.apache.poi.ss.usermodel.Sheet
 //import org.apache.poi.ss.usermodel.Workbook
 //import org.apache.poi.xssf.usermodel.XSSFWorkbook
+
 import randomname.CourseUtil.Companion.loadCurriculum
 import randomname.DateUtil.Companion.whichClasses
-import java.io.BufferedReader
-import java.io.File
-import java.io.FileReader
+import java.io.*
 import java.lang.System.currentTimeMillis
 import javax.swing.JOptionPane
 import kotlin.random.Random
+
 
 class RandomName {
     companion object{
@@ -38,19 +38,19 @@ class RandomName {
                 hash = loadNames(file!!)
                 if(isFileExists(disablecheatPath))
                     cheat = false
+                (!isFileExists(curriculum)).run { File(curriculum).createNewFile() }
                 loadCurriculum(loadFile(curriculum)!!)
                 /*
                 wb = XSSFWorkbook(FileInputStream(curriculum))
                 sheet = wb!!.getSheetAt(0)
                 DateUtil.sheet = sheet!!
-
                  */
                 println(whichClasses())
                 val gui = Gui()
                 gui.isVisible = true
                 KeepThread(gui).start()
             }catch (e:NullPointerException){
-                JOptionPane.showMessageDialog(null, "The Directory is empty! \nRequire students.txt & Curriculum.txt", "Error Report!", JOptionPane.ERROR_MESSAGE, null)
+                JOptionPane.showMessageDialog(null, "The Directory is empty! \nRequire students.txt", "Error Report!", JOptionPane.ERROR_MESSAGE, null)
                 e.printStackTrace()
             }catch (e:Exception){
                 e.printStackTrace()
@@ -61,6 +61,14 @@ class RandomName {
 
         fun isFileExists(path:String):Boolean{
             return File(path).exists()
+        }
+
+        fun readTable(list:ArrayList<String>){
+            val write = OutputStreamWriter(FileOutputStream(curriculum), "GBK")
+            val writer = BufferedWriter(write)
+            list.forEach { writer.write("$it\n")}
+            writer.close()
+            loadCurriculum(loadFile(curriculum)!!)
         }
 
         fun loadFile(path:String):File?{
