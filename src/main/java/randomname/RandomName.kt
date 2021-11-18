@@ -20,12 +20,9 @@ class RandomName {
         //var wb: Workbook? = null
         //var sheet: Sheet? = null
         val curriculum = "${path}Curriculum.txt"
-        val disablecheatPath = "${path}null.txt"
         var hash = HashMap<Int,String>()
         var startT = 0L
         var rc = ArrayList<Int>()
-        val whitelist = arrayOf(25,53,61,62,48)
-        var cheat = true
         @JvmStatic
         fun main(args:Array<String>){
             try {
@@ -36,8 +33,6 @@ class RandomName {
                     p.mkdirs()
                 file = loadFile(filepath)!!
                 hash = loadNames(file!!)
-                if(isFileExists(disablecheatPath))
-                    cheat = false
                 (!isFileExists(curriculum)).run { File(curriculum).createNewFile() }
                 loadCurriculum(loadFile(curriculum)!!)
                 /*
@@ -97,8 +92,6 @@ class RandomName {
 
         fun randomSingleNumber(size:Int):Int{
             val r = Random.nextInt(1,size+1)
-            if((r == 41 && rc.size < 48 && whichClasses() == "ÓïÎÄ") || (rc.size < 50 && whichClasses() == "ÓïÎÄ" && cheat && whitelist.contains(r)))
-                return randomSingleNumber(size)
             if(rc.size>=65){
                 rc.clear()
                 startT = currentTimeMillis()
