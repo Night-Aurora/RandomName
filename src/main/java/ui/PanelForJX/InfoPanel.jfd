@@ -1,0 +1,75 @@
+JFDML JFormDesigner: "7.0.5.0.404" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundleName": "language"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"foreground": sfield java.awt.Color white
+			"background": sfield java.awt.Color white
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold1"
+				"maximumSize": new java.awt.Dimension( 24, 50 )
+				"preferredSize": new java.awt.Dimension( 24, 50 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "North"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold2"
+				"preferredSize": new java.awt.Dimension( 24, 50 )
+				"maximumSize": new java.awt.Dimension( 24, 50 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold3"
+				"maximumSize": new java.awt.Dimension( 50, 16 )
+				"preferredSize": new java.awt.Dimension( 50, 16 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "West"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold4"
+				"preferredSize": new java.awt.Dimension( 50, 16 )
+				"maximumSize": new java.awt.Dimension( 50, 16 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "East"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "Select"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq t {space :p:168:p, comp PNG::::103:x, space :p:164:p}, seq {space :::p, par l {comp Copyright::::423:x, comp GithubLink::t::423:x}, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :p:27:p, comp PNG::::105:x, space :p:65:p, comp GithubLink:::p:27:p, space :p::p, comp Copyright::::30:x}}"
+				} ) {
+					name: "Free"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "PNG"
+						"maximumSize": new java.awt.Dimension( 64, 64 )
+						"preferredSize": new java.awt.Dimension( 64, 64 )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "GithubLink"
+						"text": new FormMessage( null, "GithubLink.text" )
+						"horizontalAlignment": 0
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "Copyright"
+						"text": new FormMessage( null, "Copyright.text" )
+						"horizontalAlignment": 0
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, -1, false )
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 125, 170 )
+			"size": new java.awt.Dimension( 535, 360 )
+		} )
+	}
+}

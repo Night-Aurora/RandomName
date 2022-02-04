@@ -1,0 +1,60 @@
+JFDML JFormDesigner: "7.0.5.0.404" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundleName": "language"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "panel"
+			"minimumSize": new java.awt.Dimension( 373, 183 )
+			"preferredSize": new java.awt.Dimension( 735, 295 )
+			"background": sfield java.awt.Color white
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold1"
+				"maximumSize": &Dimension0 new java.awt.Dimension( 24, 50 )
+				"preferredSize": new java.awt.Dimension( 24, 20 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "North"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold2"
+				"maximumSize": #Dimension0
+				"preferredSize": new java.awt.Dimension( 24, 20 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold4"
+				"maximumSize": &Dimension1 new java.awt.Dimension( 50, 16 )
+				"preferredSize": new java.awt.Dimension( 20, 16 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "West"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold3"
+				"maximumSize": #Dimension1
+				"preferredSize": new java.awt.Dimension( 20, 16 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "East"
+			} )
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "SubPanel"
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "Curriculum"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "Table"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "课程表"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 170, 135 )
+			"size": new java.awt.Dimension( 480, 295 )
+		} )
+	}
+}

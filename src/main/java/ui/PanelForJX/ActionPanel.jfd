@@ -1,0 +1,171 @@
+JFDML JFormDesigner: "7.0.5.0.404" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundleName": "language"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"foreground": sfield java.awt.Color white
+			"background": sfield java.awt.Color white
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold1"
+				"maximumSize": new java.awt.Dimension( 24, 50 )
+				"preferredSize": &Dimension0 new java.awt.Dimension( 24, 50 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "North"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold2"
+				"preferredSize": new java.awt.Dimension( 24, 50 )
+				"maximumSize": new java.awt.Dimension( 24, 50 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold3"
+				"maximumSize": new java.awt.Dimension( 50, 16 )
+				"preferredSize": new java.awt.Dimension( 50, 16 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "West"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "PlaceHold4"
+				"preferredSize": new java.awt.Dimension( 50, 16 )
+				"maximumSize": new java.awt.Dimension( 50, 16 )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "East"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "Select"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+					"axis": 1
+				} ) {
+					name: "ALL"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+						"axis": 0
+					} ) {
+						name: "SliderBox"
+						add( new FormComponent( "javax.swing.JSlider" ) {
+							name: "slider"
+							"preferredSize": new java.awt.Dimension( 200, 25 )
+							"maximumSize": new java.awt.Dimension( 32767, 25 )
+							"font": new com.jformdesigner.model.SwingDerivedFont( null, 65538, 0, false )
+							addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "sliderState", true ) )
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "number"
+							"text": new FormMessage( null, "number.text" )
+							"maximumSize": new java.awt.Dimension( 40, 25 )
+							"preferredSize": new java.awt.Dimension( 40, 25 )
+							"horizontalAlignment": 0
+							"horizontalTextPosition": 0
+							"font": new java.awt.Font( "Sitka Small", 0, 18 )
+							"foreground": new java.awt.Color( 158, 117, 250, 255 )
+						} )
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+						"axis": 0
+					} ) {
+						name: "SelectAll"
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+							"axis": 0
+						} ) {
+							name: "SelectNumber"
+							add( new FormComponent( "javax.swing.JButton" ) {
+								name: "Single"
+								"text": new FormMessage( null, "Single.text" )
+								"maximumSize": new java.awt.Dimension( 110, 40 )
+								"preferredSize": new java.awt.Dimension( 110, 40 )
+								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Single", true ) )
+							} )
+							add( new FormComponent( "javax.swing.JButton" ) {
+								name: "Multi"
+								"text": new FormMessage( null, "Multi.text" )
+								"maximumSize": new java.awt.Dimension( 110, 40 )
+								"preferredSize": new java.awt.Dimension( 110, 40 )
+								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Multi", true ) )
+							} )
+						} )
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+							"axis": 0
+						} ) {
+							name: "SelectMode"
+							add( new FormComponent( "javax.swing.JButton" ) {
+								name: "ModeI"
+								"text": new FormMessage( null, "ModeI.text" )
+								"maximumSize": new java.awt.Dimension( 110, 40 )
+								"preferredSize": new java.awt.Dimension( 110, 40 )
+								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ModeI", true ) )
+							} )
+							add( new FormComponent( "javax.swing.JButton" ) {
+								name: "ModeII"
+								"text": new FormMessage( null, "ModeII.text" )
+								"maximumSize": new java.awt.Dimension( 110, 40 )
+								"preferredSize": new java.awt.Dimension( 110, 40 )
+								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ModeII", true ) )
+							} )
+						} )
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "North"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "PlaceHold5"
+					"maximumSize": new java.awt.Dimension( 100, 16 )
+					"preferredSize": new java.awt.Dimension( 100, 16 )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "West"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "PlaceHold6"
+					"maximumSize": new java.awt.Dimension( 100, 16 )
+					"preferredSize": new java.awt.Dimension( 100, 16 )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "East"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Out"
+					"minimumSize": new java.awt.Dimension( 49, 80 )
+					"preferredSize": new java.awt.Dimension( 49, 80 )
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 10, false )
+					"horizontalAlignment": 0
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "South"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+					"axis": 1
+				} ) {
+					name: "Middle"
+					"maximumSize": new java.awt.Dimension( 435, 50 )
+					"preferredSize": new java.awt.Dimension( 435, 50 )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "PlaceHold7"
+						"maximumSize": &Dimension1 new java.awt.Dimension( 435, 50 )
+						"preferredSize": #Dimension0
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "Press"
+						"text": new FormMessage( null, "Press.text" )
+						"preferredSize": new java.awt.Dimension( 45, 60 )
+						"maximumSize": new java.awt.Dimension( 435, 60 )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Press", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "PlaceHold8"
+						"maximumSize": #Dimension1
+						"preferredSize": #Dimension0
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 60, 105 )
+			"size": new java.awt.Dimension( 535, 360 )
+		} )
+	}
+}
