@@ -233,14 +233,14 @@ class ParamsPanel : JPanel() {
         lunxunValue!!.text = lunxunSlider!!.value.also { getLongOption("ModeII").setValue(it.toLong()) }.toString()
     }
     private fun renshuS(e:ChangeEvent){
-        renshuValue!!.text = renshuSlider!!.value.also { getIntOption("Members").setValue(it) }.toString()
+        renshuValue!!.text = renshuSlider!!.value.also { getIntOption("Members").saveValue(it) }.toString()
     }
     private fun moshiS(e:ActionEvent){
         getSelectOption("Mode").setValue(moshicomboBox!!.selectedItem.toString())
     }
     private fun Reset(button:JButton){
         when(button){
-            lunxunReset -> lunxunSlider!!.value = 80
+            lunxunReset -> lunxunSlider!!.value = 60
             renshuReset -> renshuSlider!!.value = 1
             moshiReset -> moshicomboBox!!.selectedIndex = 0
         }

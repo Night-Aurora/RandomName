@@ -49,12 +49,34 @@ new FormModel {
 				}, new FormLayoutConstraints( null ) {
 					"title": "课程表"
 				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "Students"
+					add( new FormComponent( "javax.swing.JList" ) {
+						name: "List"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "学生列表"
+				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 170, 135 )
 			"size": new java.awt.Dimension( 480, 295 )
+		} )
+		add( new FormContainer( "javax.swing.JPopupMenu", new FormLayoutManager( class javax.swing.JPopupMenu ) ) {
+			name: "StuRLMenu"
+			add( new FormComponent( "javax.swing.JMenuItem" ) {
+				name: "Delete"
+				"text": new FormMessage( null, "Delete.text" )
+			} )
+			add( new FormComponent( "javax.swing.JMenuItem" ) {
+				name: "Add"
+				"text": new FormMessage( null, "Add.text" )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 215, 475 )
 		} )
 	}
 }

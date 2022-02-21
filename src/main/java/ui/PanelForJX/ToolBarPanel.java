@@ -56,11 +56,11 @@ public class ToolBarPanel extends JPanel {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         ToolBar = new JPanel();
-        Home = new CustomButton(INSTANCE.getHOME().getNormal(),INSTANCE.getHOME().enabled);
-        Data = new CustomButton(INSTANCE.getDATA().getNormal(),INSTANCE.getDATA().enabled);
-        Param = new CustomButton(INSTANCE.getPARAMS().getNormal(),INSTANCE.getPARAMS().enabled);
+        Home = new JButton();
+        Data = new JButton();
+        Param = new JButton();
         PlaceHold = new JLabel();
-        Setting = new CustomButton(INSTANCE.getSETTINGS().getNormal(),INSTANCE.getSETTINGS().enabled);
+        Setting = new JButton();
 
         //======== ToolBar ========
         {
@@ -71,19 +71,19 @@ public class ToolBarPanel extends JPanel {
             //---- Home ----
             Home.setPreferredSize(new Dimension(40, 45));
             Home.setMaximumSize(new Dimension(40, 45));
-            Home.addActionListener(this::Home);
+            Home.addActionListener(e -> Home(e));
             ToolBar.add(Home);
 
             //---- Data ----
             Data.setMaximumSize(new Dimension(40, 45));
             Data.setPreferredSize(new Dimension(70, 45));
-            Data.addActionListener(this::Data);
+            Data.addActionListener(e -> Data(e));
             ToolBar.add(Data);
 
             //---- Param ----
             Param.setMaximumSize(new Dimension(40, 45));
             Param.setPreferredSize(new Dimension(70, 45));
-            Param.addActionListener(this::Param);
+            Param.addActionListener(e -> Param(e));
             ToolBar.add(Param);
 
             //---- PlaceHold ----
@@ -97,7 +97,7 @@ public class ToolBarPanel extends JPanel {
             Setting.setSelected(true);
             Setting.setAlignmentY(0.0F);
             Setting.setPreferredSize(new Dimension(70, 45));
-            Setting.addActionListener(this::Setting);
+            Setting.addActionListener(e -> Setting(e));
             ToolBar.add(Setting);
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

@@ -9,17 +9,30 @@ object Config {
 
     private val filePath = "${UIConsts.NAME}/config.yml"
     private val studentPath = "${UIConsts.NAME}/students.yml"
+    private val curriculumPath = "${UIConsts.NAME}/curriculum.yml"
     private val config_File = File(filePath)
     private val student_File = File(studentPath)
+    val curriculum_File = File(curriculumPath)
     val config:FileConfiguration = YamlConfiguration.loadConfiguration(config_File)
+    val curriculum:FileConfiguration = YamlConfiguration.loadConfiguration(curriculum_File)
+    val student:FileConfiguration = YamlConfiguration.loadConfiguration(student_File)
     val students = HashMap<Int,String>()
-    fun load() {
-        config.save(config_File)
-    }
+    fun load(fileconfiguration:FileConfiguration? = null) =
+        fileconfiguration?.also {
+            when(it){
+                config -> config.save(config_File)
+                curriculum -> curriculum.save(curriculum_File)
+                student -> student.save(student_File)
+            }
+        }?:run {
+            config.save(config_File)
+            curriculum.save(curriculum_File)
+            student.save(student_File)
+        }
+
     fun loadNames(){
         if(!student_File.exists()) return
-        val txt = YamlConfiguration.loadConfiguration(student_File)
-        val list = txt.getStringList("students")
+        val list = student.getStringList("students")
         repeat(list.size){
             students[it] = list[it]
         }

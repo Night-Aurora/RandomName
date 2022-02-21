@@ -20,6 +20,7 @@ public class DataPanel extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        ResourceBundle bundle = ResourceBundle.getBundle("language");
         panel = new JPanel();
         PlaceHold1 = new JLabel();
         PlaceHold2 = new JLabel();
@@ -28,8 +29,14 @@ public class DataPanel extends JPanel {
         SubPanel = new JTabbedPane();
         Curriculum = new JScrollPane();
         Table = new JTable();
+        Students = new JScrollPane();
+        List = new JList();
+        StuRLMenu = new JPopupMenu();
+        Delete = new JMenuItem();
+        Add = new JMenuItem();
 
         //======== panel ========
+        {
             panel.setMinimumSize(new Dimension(373, 183));
             panel.setPreferredSize(new Dimension(735, 295));
             panel.setBackground(Color.white);
@@ -66,8 +73,30 @@ public class DataPanel extends JPanel {
                     Curriculum.setViewportView(Table);
                 }
                 SubPanel.addTab("\u8bfe\u7a0b\u8868", Curriculum);
+
+                //======== Students ========
+                {
+
+                    //---- List ----
+                    List.setFont(List.getFont().deriveFont(List.getFont().getSize() + 4f));
+                    Students.setViewportView(List);
+                }
+                SubPanel.addTab("\u5b66\u751f\u5217\u8868", Students);
             }
             panel.add(SubPanel, BorderLayout.CENTER);
+        }
+
+        //======== StuRLMenu ========
+        {
+
+            //---- Delete ----
+            Delete.setText(bundle.getString("Delete.text"));
+            StuRLMenu.add(Delete);
+
+            //---- Add ----
+            Add.setText(bundle.getString("Add.text"));
+            StuRLMenu.add(Add);
+        }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -80,5 +109,10 @@ public class DataPanel extends JPanel {
     private JTabbedPane SubPanel;
     private JScrollPane Curriculum;
     private JTable Table;
+    private JScrollPane Students;
+    private JList List;
+    private JPopupMenu StuRLMenu;
+    private JMenuItem Delete;
+    private JMenuItem Add;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

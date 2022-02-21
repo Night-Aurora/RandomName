@@ -3,14 +3,14 @@
  */
 package ui.Panel
 
+import com.sun.org.apache.bcel.internal.generic.Select
 import org.jdesktop.layout.GroupLayout
 import org.jdesktop.layout.LayoutStyle
 import ui.UIConsts
-import java.awt.BorderLayout
-import java.awt.Color
-import java.awt.Desktop
-import java.awt.Dimension
+import java.awt.*
 import java.awt.event.ActionEvent
+import java.awt.event.InputEvent
+import java.awt.event.KeyEvent
 import java.net.URI
 import java.net.URL
 import java.util.*
@@ -30,7 +30,7 @@ class SettingsPanel : JPanel() {
         PlaceHold4 = JLabel()
         Select = JPanel()
         SubPanel = JPanel()
-        PNG = JLabel(ImageIcon(RandomName.javaClass.getResource("")))
+        PNG = JLabel(/*ImageIcon(RandomName.javaClass.getResource(""))*/)
         SubSubPanel = JPanel()
         GithubLink = JLabel()
         Github = JButton()

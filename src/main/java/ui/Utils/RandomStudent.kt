@@ -7,6 +7,14 @@ object RandomStudent {
     private val same = ArrayList<Int>()
     private val secureRandom = SecureRandom()
     fun next(size:Int):String{
+        if (Config.students.size == 0) return "错误：学生名字列表为空"
+        return try {
+            RandomStudentOtherVersion.next(size)
+        }catch (e:NoClassDefFoundError){
+            Tonext(size)
+        }
+    }
+    private fun Tonext(size:Int):String{
         return when (size) {
             1 -> doing()!!
             else -> {

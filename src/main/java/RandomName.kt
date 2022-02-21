@@ -1,10 +1,15 @@
 import ui.Panel.*
 import ui.UIConsts
 import ui.Utils.Config
+import ui.Utils.CoursePass
 import ui.Utils.RandomStudent
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Component
+import java.awt.event.KeyAdapter
+import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
+import java.util.*
 import javax.swing.JFrame
 import javax.swing.JPanel
 
@@ -19,12 +24,12 @@ object RandomName {
     lateinit var lastComponent : Component
     @JvmStatic
     fun main(args: Array<String>) {
-        init()
-        frame.isVisible = true
-        frame.iconImage = UIConsts.ICON_APP
         Config.load()
         Config.loadNames()
         RandomStudent.next(1)
+        init()
+        frame.isVisible = true
+        frame.iconImage = UIConsts.ICON_APP
     }
     private fun init(){
         //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
@@ -46,8 +51,15 @@ object RandomName {
         mainPanel.add(toolBarPanel,BorderLayout.WEST)
         frame.add(mainPanel)
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+        Thread(object :Thread(){
+            override fun run() {
+                while (Config.curriculum_File.length() > 0) {
+                    frame.title = "${UIConsts.NAME} ${UIConsts.VERSION} ¿Î³Ì£º${CoursePass.whichClass() ?: "ÎÞ"}"
+                    sleep(100)
+                }
+            }
+        }).start()
     }
-
     fun frameChange(component: Component){
         mainPanel.remove(lastComponent)
         mainPanel.add(component.also { lastComponent = it },BorderLayout.CENTER)

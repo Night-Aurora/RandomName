@@ -4,13 +4,13 @@ import javax.swing.JButton
 
 class ButtonPress() {
     constructor(vararg button: JButton) : this() {
-        button.forEach { buttons.add(it) }
+        button.forEach(buttons::add)
     }
     val buttons = ArrayList<JButton>()
     fun whenButtonSelected(button: JButton) {
         button.isSelected = true
-        buttons.stream().filter { it !== button }.forEach {
-            it!!.isSelected = false
+        buttons.filter { it !== button }.forEach {
+            it.isSelected = false
             it.icon = it.disabledIcon
         }
     }

@@ -44,7 +44,7 @@ class ToolBarPanel : JPanel() {
 
     private fun whenButtonSelected(button: JButton?) {
         button!!.isSelected = true
-        buttons.stream().filter { it: JButton? -> it !== button }.forEach { it: JButton? ->
+        buttons.stream().filter { it !== button }.forEach { it: JButton? ->
             it!!.isSelected = false
             it.icon = it.disabledIcon
         }

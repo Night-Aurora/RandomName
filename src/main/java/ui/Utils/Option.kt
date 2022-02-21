@@ -8,13 +8,13 @@ object Option {
     private val options:MutableList<Option<*>> = mutableListOf()
 
     fun getIntOption(optionName:String):Option<Int>{
-        return options.filter { it.option.equals(optionName,ignoreCase = true) }[0] as Option<Int>
+        return options.filter { it.option.equals(optionName,ignoreCase = true) }.map { it as Option<Int> }[0]
     }
     fun getLongOption(optionName:String):Option<Long>{
-        return options.filter { it.option.equals(optionName,ignoreCase = true) }[0] as Option<Long>
+        return options.filter { it.option.equals(optionName,ignoreCase = true) }.map { it as Option<Long> }[0]
     }
     fun getSelectOption(optionName:String):Option<String>{
-        return options.filter { it.option.equals(optionName,ignoreCase = true) }[0] as Option<String>
+        return options.filter { it.option.equals(optionName,ignoreCase = true) }.map { it as Option<String> }[0]
     }
     class Option<T>(val option:String,default:T){
         private val s = currentTimeMillis()
@@ -28,10 +28,11 @@ object Option {
         fun setValue(value:T,save:Boolean = true){
             if((currentTimeMillis() - s)/1000 < 2) return
             internalvalue = value
-            if(save) {
-                config.set(option, internalvalue)
-                load()
-            }
+            if(save) saveValue()
+        }
+        fun saveValue(value: T = internalvalue!!){
+            config.set(option, value)
+            load()
         }
     }
     fun IntOption(option:String,default:Int):Option<Int>{

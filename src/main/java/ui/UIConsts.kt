@@ -3,10 +3,12 @@ package ui
 import ui.Companet.CustomIcon
 import java.awt.Color
 import java.awt.Image
+import java.awt.Toolkit
 
 object UIConsts {
-    const val MAIN_WINDOW_X = 600
-    const val MAIN_WINDOW_Y = 300
+    private val ScreenSize = Toolkit.getDefaultToolkit().screenSize
+    val MAIN_WINDOW_X = ScreenSize.width/3
+    val MAIN_WINDOW_Y = ScreenSize.height/4
     const val MAIN_WINDOW_WIDTH = 650
     const val MAIN_WINDOW_HEIGHT = 450
     const val NAME = "RandomName"
