@@ -1,6 +1,5 @@
 package ui.Utils
 
-import ui.Utils.Config.config
 import ui.Utils.Config.load
 import java.lang.System.currentTimeMillis
 

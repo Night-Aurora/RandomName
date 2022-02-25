@@ -10,6 +10,9 @@ import java.awt.Dimension
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import java.beans.PropertyChangeEvent
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
 import java.util.*
 import javax.swing.*
 import javax.swing.table.DefaultTableCellRenderer
@@ -40,6 +43,7 @@ class DataPanel : JPanel() {
         StuRLMenu = JPopupMenu()
         Delete = JMenuItem()
         Add = JMenuItem()
+        Import = JMenuItem()
 
         //======== panel ========
             panel!!.preferredSize = Dimension(600, 400)
@@ -91,18 +95,18 @@ class DataPanel : JPanel() {
         Delete!!.text = bundle.getString("Delete.text")
         Delete!!.addActionListener {
             List!!.selectedValuesList.takeIf { List!!.selectedValuesList.size>0 }
-                ?.takeIf { JOptionPane.showConfirmDialog(this, "确认更改？") == 0 }
+                ?.takeIf { JOptionPane.showConfirmDialog(this, "确认更改？","",0) == 0 }
                 ?.map { it as String }?.let {
                 it.forEach(StudentList!!::removeElement)
                 it.forEach{ st ->
                     val iterator = Config.students.iterator()
                     while (iterator.hasNext()){
-                        if(iterator.next().value == st) {
+                        if(iterator.next() == st) {
                             iterator.remove()
                         }
                     }
                 }
-                Config.student.set("students",Config.students.values.toMutableList())
+                Config.student.set("students",Config.students.toMutableList())
                 Config.load(Config.student)
             }//(it -> String)-> remove
             editStudentList()//resetListModel
@@ -115,15 +119,21 @@ class DataPanel : JPanel() {
             input.takeIf { it.isEmpty() || it.length > 4 }?.apply { JOptionPane.showMessageDialog(this@DataPanel,"非法字符","",JOptionPane.ERROR_MESSAGE) }?: run {
                 input.takeUnless { StudentList!!.contains(it) }?.run {//检查名字重复
                     StudentList!!.addElement(this)
-                    Config.students[Config.students.size.plus(1)] = this
+                    Config.students.add(this)
                     editStudentList()
-                    Config.student.set("students",Config.students.values.toMutableList())
+                    Config.student.set("students",Config.students.toMutableList())
                     Config.load(Config.student)
                 }
             }
         }
+        //---- Import ----
+        Import!!.text = bundle.getString("Import.text")
+        Import!!.addActionListener {
+            takeUnless {  JOptionPane.showConfirmDialog(this,"从外部文件导入学生名单\n请检查当前目录存在被导入文件\n确认开始导入","确认导入",0) == 0 }?:importStudentList()
+        }
         StuRLMenu!!.add(Add)
         StuRLMenu!!.add(Delete)
+        StuRLMenu!!.add(Import)
         List!!.add(StuRLMenu)
         List!!.font = List!!.font.deriveFont(List!!.font.size + 4f)
         List!!.addMouseListener(StuL())
@@ -150,6 +160,7 @@ class DataPanel : JPanel() {
     private var StuRLMenu: JPopupMenu? = null
     private var Delete: JMenuItem? = null
     private var Add: JMenuItem? = null
+    private var Import : JMenuItem? = null
 
     init {
         initComponents()
@@ -160,7 +171,7 @@ class DataPanel : JPanel() {
         Table!!.model = tableMode
         Table!!.setDefaultRenderer(Any::class.java, DefaultTableCellRenderer().also { it.horizontalAlignment = JLabel.CENTER })
         writeTableForm()
-        Config.students.values.forEach { StudentList!!.addElement(it) }
+        Config.students.forEach { StudentList!!.addElement(it) }
         editStudentList()
     }
     private fun readTableForm(){
@@ -183,6 +194,18 @@ class DataPanel : JPanel() {
         }
     private fun editStudentList(){
         List!!.model = StudentList
+    }
+    private fun importStudentList(){
+        val f = File("students.txt")
+        takeIf { f.exists() }?:run { JOptionPane.showMessageDialog(this,"文件不存在!"); return }
+        takeIf { f.length() > 0L }?:run { JOptionPane.showMessageDialog(this,"文件为空!"); return }
+        val loadedList = FileReader(f).readLines()
+        StudentList!!.removeAllElements()
+        loadedList.forEach(StudentList!!::addElement)
+        editStudentList()
+        Config.student.set("students",loadedList)
+        Config.load(Config.student)
+        JOptionPane.showMessageDialog(this,"导入成功!")
     }
     private fun Table(e: PropertyChangeEvent) = takeIf { Table!!.selectedColumn != -1 && Table!!.selectedRow != -1 }?.run { readTableForm() }
 }

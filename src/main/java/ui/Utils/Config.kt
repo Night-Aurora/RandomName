@@ -4,6 +4,7 @@ import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.configuration.file.YamlConfiguration
 import ui.UIConsts
 import java.io.File
+import java.util.*
 
 object Config {
 
@@ -16,7 +17,7 @@ object Config {
     val config:FileConfiguration = YamlConfiguration.loadConfiguration(config_File)
     val curriculum:FileConfiguration = YamlConfiguration.loadConfiguration(curriculum_File)
     val student:FileConfiguration = YamlConfiguration.loadConfiguration(student_File)
-    val students = HashMap<Int,String>()
+    val students = LinkedList<String>()
     fun load(fileconfiguration:FileConfiguration? = null) =
         fileconfiguration?.also {
             when(it){
@@ -30,11 +31,8 @@ object Config {
             student.save(student_File)
         }
 
-    fun loadNames(){
-        if(!student_File.exists()) return
-        val list = student.getStringList("students")
-        repeat(list.size){
-            students[it] = list[it]
-        }
+    fun loadNames() {
+        takeIf { student_File.exists() }?:return
+        student.getStringList("students").forEach(students::add)
     }
 }
