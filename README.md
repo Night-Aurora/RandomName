@@ -16,8 +16,5 @@ xx2
 xx3
 xx4
 ```
-+ 下载 https://github.com/Night-Aurora/RandomName/releases/download/5.0/Format.zip 并运行
-+ 把students.yml 文件放入程序运行文件夹内
++ 打开程序 --> 数据 --> 学生名单 --> 右键菜单 --> 从外部导入
 + 完成
-
-
